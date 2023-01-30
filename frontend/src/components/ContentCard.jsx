@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useSearchParams } from 'react-router-dom';
 
-export default function ContentCard({data, topics, getTopicProgress}) {
+export default function ContentCard({data, topics, getTopicProgress, filter}) {
     const [searchParams] = useSearchParams();
     const getIsCompleted = ()=>{
         if(topics?.data?.length === 0)return false;
@@ -25,7 +25,7 @@ export default function ContentCard({data, topics, getTopicProgress}) {
             console.log(res);
         }).catch((e)=>console.log(e));
     }
-
+    if(!data.name.toLowerCase().includes(filter.toLowerCase())) return <></>
     return (
       <div className='tw-flex tw-flex-col tw-relative tw-p-12 tw-m-6 tw-items-center tw-w-fit tw-shadow-md tw-cursor-pointer tw-rounded-md tw-bg-[#FFF2F2 tw-border-2 tw-border-[#8EA7E9] hover:tw-shadow-[#8EA7E9] tw-transition-all tw-duration-300]'>
           <div className='tw-uppercase tw-absolute tw-right-0 tw-top-0 tw-px-2 tw-py-[2px] tw-bg-[#7286D3] tw-rounded-bl tw-rounded-tr tw-text-white'>{data.type}</div>

@@ -10,7 +10,7 @@ export default function Header({student}) {
     return (
         <div className='tw-flex tw-justify-between tw-py-8 tw-px-8 tw-h-[120px] tw-bg-[#7286D3] tw-text-white tw-items-center'>
             <div className='tw-flex tw-h-full tw-items-center'>
-                <img src="./assets/user.jpeg" alt="" className='tw-h-[80px] tw-rounded-full'/>
+                <img src="/assets/user.jpeg" alt="" className='tw-h-[80px] tw-rounded-full'/>
                 <div className='tw-px-6'>
                     <div>Hi, {student.name}</div>
                     <div><span>Standard</span> {student.standard}</div>

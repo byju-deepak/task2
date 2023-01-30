@@ -12,6 +12,7 @@ export default function Chapter({subjects}) {
     const [subject, setSubject] = useState([]);
     const [chapters, setChapters] = useState([]);
     const [topics, setTopics] = useState([])
+    const [filterChapter, setFilterChapter] = useState("")
     const navigate = useNavigate();
 
     const getTopicProgress = ()=>{
@@ -69,14 +70,17 @@ export default function Chapter({subjects}) {
                     })
                 }
             </div>
-            <div className='tw-w-full tw-flex tw-items-start tw-flex-wrap'>
+            <div className='tw-w-full tw-flex tw-items-start tw-flex-wrap tw-relative'>
                 {
                     chapters.length == 0?(
                         <div className='tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center tw-text-xl tw-p-4 tw-text-center'>No Content Avilable</div>
                     ):(
-                        chapters.map((e, ind)=>{
-                            return <ContentCard data={e} key={ind} topics={topics} getTopicProgress={getTopicProgress}/>
-                        })
+                        <>
+                            {chapters.map((e, ind)=>{
+                                return <ContentCard data={e} key={ind} topics={topics} getTopicProgress={getTopicProgress} filter={filterChapter}/>
+                            })}
+                            <input type="text" placeholder='Filter Chapter' className='tw-px-4 tw-py-2 tw-w-52 tw-absolute tw-top-[20px] -tw-right-[190px] tw-shadow-sm tw-shadow-[#7286D3] tw-border-solid tw-border-[#7286D3] tw-border-[1px] tw-rounded tw-transition-all tw-duration-300 hover:tw-right-1 focus:tw-right-1' value={filterChapter} onChange={(e)=>setFilterChapter(e.target.value)}/>
+                        </>
                     )
                 }
             </div>
