@@ -10,7 +10,7 @@ export default function ChapterCard({data, ind, iconView, progress}) {
         var completed = 0;
         const curProgress = progress?.data?.filter((e)=>e.chapter == data.chapter_id)
         if(curProgress?.length > 0) completed = curProgress[0].completed?.length;
-        return completed / data.resources.length;
+        return Math.round(completed / data.resources.length * 10000)/100;
     }
 
 
@@ -25,7 +25,7 @@ export default function ChapterCard({data, ind, iconView, progress}) {
         return (
             <div className={`tw-m-2 ${iconView?"tw-bg-white tw-text-black":"tw-bg-[#8EA7E9] tw-text-[white]"} tw-py-2 tw-px-4 tw-rounded-sm ${iconView?"hover:tw-bg-[#FFF2F2]":"hover:tw-bg-[#7286D3]"} tw-cursor-pointer tw-transition-all tw-duration-300 tw-flex tw-justify-between tw-items-center`} onClick={()=>navigate(`/subject/chapter?subject=${data.subject}&chapter=${data.chapter_id}`)}>
                 <div>Ch {ind + 1}{iconView?"":". "+data.name}</div>
-                {iconView?null:<div>Completed {getProgress() * 100}%</div>}
+                {iconView?null:<div>Completed {getProgress()}%</div>}
             </div>
         )
     }

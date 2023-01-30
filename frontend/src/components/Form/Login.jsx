@@ -26,9 +26,11 @@ export default function Login() {
     }
 
     return (
-        <div className='tw-w-3/6 tw-m-auto tw-self-center'>
-            <Link to={"/register"} className="tw-absolute tw-top-4 tw-right-4 tw-text-sky-500 tw-underline">Register</Link>
-            <FormContainer heading="Login" element={<LoginForm data={data} setData={setData} checkValid={checkValid} onSubmit={onSubmit}/>} />
+        <div className=' tw-bg-[#7286D3] tw-h-full tw-flex'>
+            <div className='tw-w-3/6 tw-m-auto tw-self-center'>
+                <Link to={"/register"} className="tw-absolute tw-top-4 tw-right-4 tw-text-white tw-underline">Register</Link>
+                <FormContainer heading="Login" element={<LoginForm data={data} setData={setData} checkValid={checkValid} onSubmit={onSubmit}/>} />
+            </div>
         </div>
     )
 }

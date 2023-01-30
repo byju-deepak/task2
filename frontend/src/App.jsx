@@ -11,6 +11,8 @@ import Subject from "./page/Subject";
 function App() {
     const [subjects, setSubjects] = useState([])
     const [student, setStudent] = useState({});
+    const [notification, setNotification] = useState([])
+
     useEffect(()=>{
         axios.get("http://localhost:8000/api/subject/all", {
             headers : {
@@ -27,16 +29,23 @@ function App() {
             setStudent(e.data.user[0]);
             console.log(e.data.user[0]);
         }).catch((e)=>{})
+        axios.get(`http://localhost:8000/api/notification`, {
+            headers : {
+                "auth-token" : localStorage.getItem('token')
+            }
+        }).then((res)=>{
+            setNotification(res.data.data)
+        })
     }, [])
     return (
         <div className="tw-h-screen tw-w-screen tw-max-h-screen tw-flex tw-flex-col">
             <Header student={student}/>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Dashboard subjects={subjects} student={student}/>} />
+                    <Route path="/" element={<Dashboard subjects={subjects} student={student} notification={notification}/>} />
                     <Route path="/register" element={<Form steps={2} student={student}/>} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/subject" element={<Subject subjects={subjects} student={student}/>} />
+                    <Route path="/subject" element={<Subject subjects={subjects} student={student} notification={notification}/>} />
                     <Route path="/subject/chapter" element={<Chapter subjects={subjects} student={student}/>} />
                 </Routes>
             </BrowserRouter>

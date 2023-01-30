@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import ChapterCard from '../components/ChapterCard'
 import ContentCard from '../components/ContentCard';
+import Form from '../components/Form/Form';
+import SubjectCard from '../components/SubjectCard';
 
 export default function Chapter({subjects}) {
     const [searchParams] = useSearchParams();
@@ -51,10 +53,15 @@ export default function Chapter({subjects}) {
         getTopicProgress();
     }, [searchParams])
     
-    if(!localStorage.getItem("token")) navigate("/register");
+    if(!localStorage.getItem("token")) return <Form steps={2} />
 
     return (
         <div style={{backgroundImage:"url(./assets/background.jpg)"}} className='tw-w-full tw-h-full tw-bg-cover tw-flex tw-justify-between'>
+            <div className='tw-flex tw-flex-col tw-bg-[#7286D3] tw-border-t-2 tw-border-r-2 tw-border-[#FFFFFF] '>
+                {
+                    subjects.map((e,ind)=><SubjectCard data={e} iconView={true} key={ind}/>)
+                }
+            </div>
             <div className='tw-h-full tw-min-w-fit tw-bg-[#7286D3] tw-border-t-2 tw-border-white'>
                 {
                     subject?.map((e, ind)=>{

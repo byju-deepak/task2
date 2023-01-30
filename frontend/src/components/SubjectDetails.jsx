@@ -6,9 +6,11 @@ import ChapterCard from './ChapterCard';
 export default function SubjectDetails({chapters, progress, assignment}) {
     const [searchParams, setSearchParams] = useSearchParams();
     const [chapterView, setChapterView] = useState(searchParams.get("chapter"));
-
+    useEffect(()=>{
+        setChapterView(searchParams.get("chapter"));
+    }, [searchParams])
     return (
-        <div>
+        <div className='tw-flex tw-flex-col tw-max-h-full'>
             <div className='tw-py-2 tw-bg-[#E5E0FF] tw-m-[2px] tw-flex tw-justify-evenly'>
                 <div className={`tw-transition-all tw-duration-300 tw-ease-linear tw-w-5/12 tw-text-center tw-py-2 tw-cursor-pointer tw-rounded ${chapterView==="true"?"tw-bg-white tw-shadow tw-shadow-[#7286D3]":""}`} onClick={()=>{setSearchParams({subject:searchParams.get("subject"), chapter:true}); setChapterView("true")}}>Study Material</div>
                 <div className={`tw-transition-all tw-duration-300 tw-ease-linear tw-w-5/12 tw-text-center tw-cursor-pointer tw-py-2 tw-rounded ${chapterView==="true"?"":"tw-bg-white tw-shadow tw-shadow-[#7286D3]"}`} onClick={()=>{setSearchParams({subject:searchParams.get("subject"), chapter:false}); setChapterView("false")}}>Assignment/Test</div>
